@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louislasourie links</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .title {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeIn 2s ease-in;
+            background: linear-gradient(45deg, #808080, #d3d3d3, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease, text-shadow 0.1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #ccc;
+            animation: fadeIn 3s ease-in;
+            padding: 0 10px;
+            transition: transform 0.1s ease, text-shadow 0.1s ease;
+            cursor: pointer;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            animation: fadeIn 4s ease-in;
+            padding: 0 10px;
+            transition: transform 0.1s ease;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 8px 16px;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            transition: all 0.3s ease, box-shadow 0.1s ease, transform 0.2s ease;
+            flex-grow: 1;
+            max-width: 120px;
+            position: relative;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .social-links a:hover svg {
+            fill: #000;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0)
+            );
+            background-size: 200% 100%;
+            animation: borderLight 3s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .social-links a:hover::before {
+            animation: borderLight 1.5s linear infinite;
+        }
+
+        .social-links a img {
+            width: 18px;
+            height: 18px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        #easterVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+            display: none;
+            mix-blend-mode: screen;
+            background: transparent;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes borderLight {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .social-links a {
+                width: 80%;
+                max-width: 200px;
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Louis la Sourie</div>
+        <div class="subtitle">🇫🇷</div>
+        <div class="social-links">
+            </a>
+            <a href="https://www.instagram.com/louiis.ltnp/" target="_blank">
+                <img src="insta.png" alt="Instagram">Insta perso
+            </a>
+            <a href="https://www.instagram.com/louislasourie/" target="_blank">
+                <img src="insta.png" alt="Instagram">Insta LouislaSourie
+            </a>
+            <a href="https://www.tiktok.com/@odioo.fr" target="_blank">
+                <img src="tiktok.png" alt="TikTok">Tiktok
+            </a>
+        </div>
+    </div>
+
+    <video id="easterVideo">
+        <source src="easterlayer.mp4" type="video/mp4">
+        <track kind="captions" src="easterson.aac" srclang="fr" label="Easter Sound">
+        Votre navigateur ne supporte pas la balise vidéo.
+    </video>
+
+    <script>
+        const title = document.querySelector('.title');
+        const subtitle = document.querySelector('.subtitle');
+        const socialLinks = document.querySelector('.social-links');
+        const links = document.querySelectorAll('.social-links a');
+        const container = document.querySelector('.container');
+        const easterVideo = document.querySelector('#easterVideo');
+
+        subtitle.addEventListener('click', () => {
+            easterVideo.style.display = 'block';
+            easterVideo.play();
+            easterVideo.onended = () => {
+                easterVideo.style.display = 'none';
+            };
+        });
+
+        const updateCenter = () => {
+            const rect = container.getBoundingClientRect();
+            return {
+                centerX: rect.left + rect.width / 2,
+                centerY: rect.top + rect.height / 2
+            };
+        };
+
+        let { centerX, centerY } = updateCenter();
+
+        window.addEventListener('resize', () => {
+            ({ centerX, centerY } = updateCenter());
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.pageX;
+            const mouseY = e.pageY;
+
+            const distX = mouseX - centerX;
+            const distY = mouseY - centerY;
+            const distance = Math.sqrt(distX * distX + distY * distY);
+
+            const maxDistance = Math.max(window.innerWidth, window.innerHeight);
+            const influence = Math.max(0, 1 - distance / (maxDistance / 2));
+
+            const tiltX = (distY / 20) * influence;
+            const tiltY = (-distX / 20) * influence;
+            const moveX = (distX / 50) * influence;
+            const moveY = (distY / 50) * influence;
+            title.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateX(${moveX}px) translateY(${moveY}px)`;
+
+            const shadowX = (-distX / 30) * influence;
+            const shadowY = (-distY / 30) * influence;
+            title.style.textShadow = `${shadowX}px ${shadowY}px 10px rgba(255, 255, 255, ${0.5 * influence}), 0 2px 4px rgba(0, 0, 0, 0.3)`;
+
+            const subtitleMoveX = (distX / 80) * influence;
+            const subtitleMoveY = (distY / 80) * influence;
+            subtitle.style.transform = `translateX(${subtitleMoveX}px) translateY(${subtitleMoveY}px)`;
+            subtitle.style.textShadow = `${shadowX / 2}px ${shadowY / 2}px 5px rgba(255, 255, 255, ${0.3 * influence})`;
+
+            const linksMoveX = (distX / 100) * influence;
+            const linksMoveY = (distY / 100) * influence;
+            socialLinks.style.transform = `translateX(${linksMoveX}px) translateY(${linksMoveY}px)`;
+
+            links.forEach(link => {
+                const linkRect = link.getBoundingClientRect();
+                const linkCenterX = linkRect.left + linkRect.width / 2;
+                const linkCenterY = linkRect.top + linkRect.height / 2;
+                const linkDistX = (mouseX - linkCenterX) / 20 * influence;
+                const linkDistY = (mouseY - linkCenterY) / 20 * influence;
+                link.style.boxShadow = `${linkDistX}px ${linkDistY}px 15px rgba(255, 255, 255, ${0.4 * influence})`;
+            });
+        });
+
+        document.addEventListener('mouseleave', () => {
+            title.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px)';
+            title.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.3)';
+            subtitle.style.transform = 'translateX(0px) translateY(0px)';
+            subtitle.style.textShadow = 'none';
+            socialLinks.style.transform = 'translateX(0px) translateY(0px)';
+            links.forEach(link => {
+                link.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
